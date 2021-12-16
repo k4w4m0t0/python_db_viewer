@@ -1,0 +1,234 @@
+
+WindowManager: 
+    StartWindow: 
+    ShelfWindow:
+    PrintersWindow:
+    EditingWindow:
+    SettingsWindow:
+    ItemWindow:
+
+<StartWindow>:
+    name:'Start'
+    MDBoxLayout:
+        md_bg_color:94/255, 150/255, 240/255, 1
+        orientation:'vertical'
+        MDBoxLayout:
+            size_hint_y:.25
+            padding:dp(25)
+            MDBoxLayout:
+                orientation:"vertical"
+                MDLabel:
+                    text:"Приложение для инвентаризации картриджей"
+                    font_style:"H4"
+
+        MDGridLayout:
+            size_hint_y:.75
+            cols:2
+            padding:[dp(15),dp(15),dp(15),dp(35)]
+            spacing:dp(15)
+            ElementCard:
+                image:'images/shelf.png'
+                text:"Полки"
+                on_release:
+                    app.root.current = "Shelf"
+                    root.manager.transition.direction = "left"
+                # subtext:"Полки"
+                # items_count:""
+
+            # ElementCard:
+            #     image:'images/stuff.png'
+            #     text:"Содержимое"
+            #     on_release:
+            #         app.root.current = "Stuff"
+            #         root.manager.transition.direction = "left"
+            #     # subtext:"Полки"
+            #     # items_count:""
+
+            ElementCard:
+                image:'images/printer.png'
+                text:"Принтер"
+                on_release:
+                    app.root.current = "Printers"
+                    root.manager.transition.direction = "left"
+                # subtext:"Полки"
+                # items_count:""
+
+            # ElementCard:
+            #     image:'images/cartridge.png'
+            #     text:"Картридж"
+            #     on_release:
+            #         app.root.current = "Cartridge"
+            #         root.manager.transition.direction = "left"
+            #     # subtext:"Полки"
+            #     # items_count:""
+            
+            # ElementCard:
+            #     image:'images/art.png'
+            #     text:"Артикуль"
+            #     on_release:
+            #         app.root.current = "Cartridge"
+            #         root.manager.transition.direction = "left"
+            #     # subtext:"Настройки"
+            #     # items_count:""
+
+            # ElementCard:
+            #     image:'images/cartridge-status.png'
+            #     text:"Статус"
+            #     on_release:
+            #         app.root.current = "Status"
+            #         root.manager.transition.direction = "left"
+            #     # subtext:"Настройки"
+            #     # items_count:""
+
+            # ElementCard:
+            #     image:'images/producer.png'
+            #     text:"Произвоитель"
+            #     on_release:
+            #         app.root.current = "Producer"
+            #         root.manager.transition.direction = "left"
+            #     # subtext:"Настройки"
+            #     # items_count:""
+            ElementCard:
+                image:'images/edit.png'
+                text:"Редактирование"
+                on_release:
+                    app.root.current = "Editing"
+                    root.manager.transition.direction = "left"
+                # subtext:"Редактирование"
+                # items_count:""
+            ElementCard:
+                image:'images/settings.png'
+                text:"Настройки"
+                on_release:
+                    app.root.current = "Settings"
+                    root.manager.transition.direction = "left"
+                # subtext:"Настройки"
+                # items_count:""
+
+
+
+<ElementCard@MDCard>:
+    md_bg_color:.32, .85, .91, 1
+    padding:dp(15)
+    spacing:dp(15)
+    radius:dp(25)
+    ripple_behavior: True
+    image:''
+    text:""
+    items_count:""
+    subtext:''
+
+    orientation:'vertical'
+    Image:
+        source:root.image
+    MDBoxLayout:
+        orientation:'vertical'
+        MDLabel:
+            halign:"center"
+            text:root.text
+            font_style:"H6"
+        MDLabel:
+            halign:"center"
+            font_style:"Caption"
+            text:root.subtext
+        MDLabel:
+            halign:"center"
+            text:root.items_count
+
+<ShelfWindow>:
+    name:'Shelf'
+    MDBoxLayout:
+        md_bg_color: 221/255, 247/255, 176/255, 1 #77/255, 77/255, 77/255, 1
+        orientation:'vertical'
+        ScrollView:
+            MDList:
+                id: shelf_list
+                    
+        # MDGridLayout:
+        #     size_hint_y:.75
+        #     cols:2
+        #     padding:[dp(15),dp(15),dp(15),dp(35)]
+        #     spacing:dp(15)
+        #     Button:
+        #         text: 'Back to menu'
+        #         on_press:
+        #             root.manager.transition.direction = 'right'
+        #             root.manager.current = 'Start'
+
+
+<PrintersWindow>:
+    name:'Printers'
+    MDBoxLayout:
+        md_bg_color: 221/255, 247/255, 176/255, 1 #77/255, 77/255, 77/255, 1
+        orientation:'vertical'
+        ScrollView:
+            MDList:
+                id: list_one
+
+<ShelfItem>:
+    id: shelf_id
+    md_bg_color:199/255, 54/255, 54/255, 1
+    on_release: print("nigga")
+    text:""
+    on_release: app.root.current = 'Item'
+    IconLeftWidget:
+        icon:"cached"
+    RightButton:
+        icon:'delete-forever-outline'
+
+<EditingWindow>:
+    name:'Editing'
+    MDBoxLayout:
+        md_bg_color:17/255, 0/255, 255/255, 1
+        Button:
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'Start'
+
+<SettingsWindow>:
+    name:'Settings'
+    MDBoxLayout:
+        md_bg_color:255/255, 0/255, 212/255, 1
+        Button:
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'Start'
+
+<ItemWindow>:
+    name: 'Item'
+    MDBoxLayout:
+        md_bg_color:255/255, 0/255, 212/255, 1
+        Button:
+            text: 'Back to menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'Start'
+
+
+
+
+# <StuffWindow>:
+#     name:'Stuff'
+#     MDBoxLayout:
+#         orientation:'vertical'
+#         md_bg_color:221/255, 247/255, 176/255, 1
+#         Button:
+#             text: 'Back to menu'
+#             on_press:
+#                 root.manager.transition.direction = 'right'
+#                 root.manager.current = 'Start'
+# <ArticleWindow>:
+#     name:'Article'
+#     MDBoxLayout:
+#         orientation:'vertical'
+#         md_bg_color:0/255, 0/255, 0/255, 1
+# <StatusWindow>:
+#     name:'Status'
+#     MDBoxLayout:
+#         md_bg_color:255/255, 0/255, 0/255, 1
+# <ProducerWindow>:
+#     name:'Producer'
+#     MDBoxLayout:
+#         md_bg_color:199/255, 54/255, 54/255, 1
